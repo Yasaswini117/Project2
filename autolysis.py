@@ -1,14 +1,3 @@
-# \*
-# Installlations required
-# pandas
-# matplotlib.pyplot
-# seaborn
-# requests
-# numpy
-# chardet
-# tabulate
-# */
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -18,8 +7,10 @@ import requests
 import numpy as np
 from chardet import detect
 
-# Set environment variable for AIPROXY_TOKEN
-AIPROXY_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjMwMDMxMTdAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.LX_wTuS0-CWg6IBPJtnClBNYmwR5yUbDhaWYd2DmaI8"
+# Fetch AIPROXY_TOKEN from environment variable
+AIPROXY_TOKEN = os.getenv("AIPROXY_TOKEN")
+if not AIPROXY_TOKEN:
+    raise ValueError("AIPROXY_TOKEN environment variable is not set.")
 
 # Use the AIProxy endpoint
 AI_PROXY_URL = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
