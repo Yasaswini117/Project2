@@ -1,3 +1,14 @@
+# \*
+# Installlations required
+# pandas
+# matplotlib.pyplot
+# seaborn
+# requests
+# numpy
+# chardet
+# tabulate
+# */
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -107,22 +118,43 @@ def analyze_csv(file_path):
         with open("README.md", "w") as f:
             f.write("# Automated Analysis Report\n\n")
             f.write("## Dataset Overview\n")
-            f.write(f"Number of rows: {data.shape[0]}\n")
-            f.write(f"Number of columns: {data.shape[1]}\n\n")
+            f.write(f"- **Number of rows**: {data.shape[0]}\n")
+            f.write(f"- **Number of columns**: {data.shape[1]}\n\n")
+
             f.write("## Column Summary\n")
-            f.write(json.dumps(column_summary, indent=2))
-            f.write("\n\n## Summary Statistics\n")
-            f.write(stats.to_string())
-            f.write("\n\n## Correlation Matrix\n")
-            f.write(correlation.to_string() if not isinstance(correlation, str) else correlation)
-            f.write("\n\n## Outlier Detection\n")
-            f.write(json.dumps(outliers, indent=2))
-            f.write("\n\n## Insights from LLM\n")
+            f.write("| Column Name | Data Type | Missing Values | Unique Values | Sample Values |\n")
+            f.write("|-------------|-----------|----------------|---------------|---------------|\n")
+            for col, details in column_summary.items():
+                f.write(f"| {col} | {details.get('type', 'N/A')} | {details.get('num_missing', 'N/A')} | {details.get('unique_values', 'N/A')} | {details.get('sample_values', 'N/A')} |\n")
+            f.write("\n")
+
+            f.write("## Summary Statistics\n")
+            f.write(stats.to_markdown())
+            f.write("\n\n")
+
+            f.write("## Correlation Matrix\n")
+            if not isinstance(correlation, str):
+                f.write(correlation.to_markdown())
+            else:
+                f.write(correlation)
+            f.write("\n\n")
+
+            f.write("## Outlier Detection\n")
+            f.write("| Column Name | Outlier Count |\n")
+            f.write("|-------------|---------------|\n")
+            for col, count in outliers.items():
+                f.write(f"| {col} | {count} |\n")
+            f.write("\n")
+
+            f.write("## Insights from LLM\n")
             f.write(insights)
-            f.write("\n\n## Visualizations\n")
+            f.write("\n\n")
+
+            f.write("## Visualizations\n")
             if not numeric_data.empty:
                 f.write("![Correlation Matrix](correlation_matrix.png)\n")
                 f.write("![Histograms](histograms.png)\n")
+
     except Exception as e:
         print(f"Error processing file {file_path}: {str(e)}")
 
