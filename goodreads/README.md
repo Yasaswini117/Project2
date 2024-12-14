@@ -1,352 +1,147 @@
 # Automated Analysis Report
 
 ## Dataset Overview
-Number of rows: 10000
-Number of columns: 23
+- **Number of rows**: 10000
+- **Number of columns**: 23
 
 ## Column Summary
-{
-  "book_id": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 10000,
-    "sample_values": [
-      3216,
-      6405,
-      4593
-    ]
-  },
-  "goodreads_book_id": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 10000,
-    "sample_values": [
-      17876,
-      37338,
-      10889279
-    ]
-  },
-  "best_book_id": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 10000,
-    "sample_values": [
-      7646805,
-      9670094,
-      7967
-    ]
-  },
-  "work_id": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 10000,
-    "sample_values": [
-      6727073,
-      15568720,
-      42386247
-    ]
-  },
-  "books_count": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 597,
-    "sample_values": [
-      51,
-      46,
-      50
-    ]
-  },
-  "isbn": {
-    "type": "object",
-    "num_missing": 700,
-    "unique_values": 9300,
-    "sample_values": [
-      "439672465",
-      "670016381",
-      "1423134494"
-    ]
-  },
-  "isbn13": {
-    "type": "float64",
-    "num_missing": 585,
-    "unique_values": 9153,
-    "sample_values": [
-      9780399256190.0,
-      9780553807140.0,
-      9780810993140.0
-    ]
-  },
-  "authors": {
-    "type": "object",
-    "num_missing": 0,
-    "unique_values": 4664,
-    "sample_values": [
-      "Anthony Doerr",
-      "Alexandra Adornetto",
-      "Laura Joffe Numeroff, Felicia Bond"
-    ]
-  },
-  "original_publication_year": {
-    "type": "float64",
-    "num_missing": 21,
-    "unique_values": 293,
-    "sample_values": [
-      2014.0,
-      2003.0,
-      2003.0
-    ]
-  },
-  "original_title": {
-    "type": "object",
-    "num_missing": 585,
-    "unique_values": 9274,
-    "sample_values": [
-      "One Fish, Two Fish, Red Fish, Blue Fish",
-      "September",
-      "The Noticer: Sometimes, all a person needs is a little perspective."
-    ]
-  },
-  "title": {
-    "type": "object",
-    "num_missing": 0,
-    "unique_values": 9964,
-    "sample_values": [
-      "The Walking Dead, Vol. 03: Safety Behind Bars",
-      "Dawn (Cutler, #1)",
-      "The Ipcress File (Secret File, #1)"
-    ]
-  },
-  "language_code": {
-    "type": "object",
-    "num_missing": 1084,
-    "unique_values": 25,
-    "sample_values": [
-      "en-US",
-      "eng",
-      "eng"
-    ]
-  },
-  "average_rating": {
-    "type": "float64",
-    "num_missing": 0,
-    "unique_values": 184,
-    "sample_values": [
-      4.27,
-      4.14,
-      4.05
-    ]
-  },
-  "ratings_count": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 9003,
-    "sample_values": [
-      13541,
-      30415,
-      123065
-    ]
-  },
-  "work_ratings_count": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 9053,
-    "sample_values": [
-      15555,
-      15473,
-      25090
-    ]
-  },
-  "work_text_reviews_count": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 4581,
-    "sample_values": [
-      4225,
-      4483,
-      3586
-    ]
-  },
-  "ratings_1": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 2630,
-    "sample_values": [
-      520,
-      398,
-      437
-    ]
-  },
-  "ratings_2": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 4117,
-    "sample_values": [
-      2560,
-      641,
-      257
-    ]
-  },
-  "ratings_3": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 6972,
-    "sample_values": [
-      2468,
-      5531,
-      4856
-    ]
-  },
-  "ratings_4": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 7762,
-    "sample_values": [
-      3967,
-      5929,
-      59629
-    ]
-  },
-  "ratings_5": {
-    "type": "int64",
-    "num_missing": 0,
-    "unique_values": 8103,
-    "sample_values": [
-      32492,
-      20957,
-      10520
-    ]
-  },
-  "image_url": {
-    "type": "object",
-    "num_missing": 0,
-    "unique_values": 6669,
-    "sample_values": [
-      "https://images.gr-assets.com/books/1426128094m/23245587.jpg",
-      "https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png",
-      "https://images.gr-assets.com/books/1329749855m/12522507.jpg"
-    ]
-  },
-  "small_image_url": {
-    "type": "object",
-    "num_missing": 0,
-    "unique_values": 6669,
-    "sample_values": [
-      "https://images.gr-assets.com/books/1358353512s/9736930.jpg",
-      "https://images.gr-assets.com/books/1298564680s/10433900.jpg",
-      "https://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png"
-    ]
-  }
-}
+| Column Name | Data Type | Missing Values | Unique Values | Sample Values |
+|-------------|-----------|----------------|---------------|---------------|
+| book_id | int64 | 0 | 10000 | [9725, 4863, 7375] |
+| goodreads_book_id | int64 | 0 | 10000 | [27822, 73864, 8520362] |
+| best_book_id | int64 | 0 | 10000 | [11870085, 23299512, 64394] |
+| work_id | int64 | 0 | 10000 | [2124255, 15353639, 1654509] |
+| books_count | int64 | 0 | 597 | [141, 52, 31] |
+| isbn | object | 700 | 9300 | ['055358359X', '451412354', '1841493341'] |
+| isbn13 | float64 | 585 | 9153 | [9781857231360.0, 9780440221660.0, 9780439568420.0] |
+| authors | object | 0 | 4664 | ['Jeph Loeb, Tim Sale, Bjarne Hansen', 'Caitlin Moran', 'Brian Jacques'] |
+| original_publication_year | float64 | 21 | 293 | [2007.0, 2006.0, 1906.0] |
+| original_title | object | 585 | 9274 | ['Come Away with Me', 'Beautiful Creatures', 'Five Little Monkeys Jumping on the Bed (The Five Little Monkeys)'] |
+| title | object | 0 | 9964 | ['The Trespasser (Dublin Murder Squad #6)', 'His Excellency: George Washington', 'The Complete Sherlock Holmes, Vol 2'] |
+| language_code | object | 1084 | 25 | ['en-US', 'eng', 'eng'] |
+| average_rating | float64 | 0 | 184 | [3.87, 4.04, 4.04] |
+| ratings_count | int64 | 0 | 9003 | [28430, 17896, 77258] |
+| work_ratings_count | int64 | 0 | 9053 | [27481, 69052, 33151] |
+| work_text_reviews_count | int64 | 0 | 4581 | [457, 6241, 6182] |
+| ratings_1 | int64 | 0 | 2630 | [159, 121, 681] |
+| ratings_2 | int64 | 0 | 4117 | [4620, 1211, 256] |
+| ratings_3 | int64 | 0 | 6972 | [76071, 7525, 4548] |
+| ratings_4 | int64 | 0 | 7762 | [5473, 4420, 25005] |
+| ratings_5 | int64 | 0 | 8103 | [5542, 3961, 28335] |
+| image_url | object | 0 | 6669 | ['https://images.gr-assets.com/books/1403179783m/18884.jpg', 'https://images.gr-assets.com/books/1412531529m/104086.jpg', 'https://images.gr-assets.com/books/1382652310m/14290364.jpg'] |
+| small_image_url | object | 0 | 6669 | ['https://images.gr-assets.com/books/1317294278s/7619292.jpg', 'https://images.gr-assets.com/books/1457623323s/5068.jpg', 'https://images.gr-assets.com/books/1500191671s/61663.jpg'] |
 
 ## Summary Statistics
-                             count unique                                                                                       top  freq                  mean                  std          min              25%              50%              75%              max
-book_id                    10000.0    NaN                                                                                       NaN   NaN                5000.5           2886.89568          1.0          2500.75           5000.5          7500.25          10000.0
-goodreads_book_id          10000.0    NaN                                                                                       NaN   NaN          5264696.5132        7575461.86359          1.0         46275.75         394965.5       9382225.25       33288638.0
-best_book_id               10000.0    NaN                                                                                       NaN   NaN          5471213.5801        7827329.89072          1.0         47911.75         425123.5        9636112.5       35534230.0
-work_id                    10000.0    NaN                                                                                       NaN   NaN          8646183.4246       11751060.82408         87.0        1008841.0        2719524.5      14517748.25       56399597.0
-books_count                10000.0    NaN                                                                                       NaN   NaN               75.7127           170.470728          1.0             23.0             40.0             67.0           3455.0
-isbn                          9300   9300                                                                                 375700455     1                   NaN                  NaN          NaN              NaN              NaN              NaN              NaN
-isbn13                      9415.0    NaN                                                                                       NaN   NaN  9755044298883.462891  442861920665.573364  195170342.0  9780316192995.0  9780451528640.0  9780830777175.0  9790007672390.0
-authors                      10000   4664                                                                              Stephen King    60                   NaN                  NaN          NaN              NaN              NaN              NaN              NaN
-original_publication_year   9979.0    NaN                                                                                       NaN   NaN           1981.987674           152.576665      -1750.0           1990.0           2004.0           2011.0           2017.0
-original_title                9415   9274                                                                                               5                   NaN                  NaN          NaN              NaN              NaN              NaN              NaN
-title                        10000   9964                                                                            Selected Poems     4                   NaN                  NaN          NaN              NaN              NaN              NaN              NaN
-language_code                 8916     25                                                                                       eng  6341                   NaN                  NaN          NaN              NaN              NaN              NaN              NaN
-average_rating             10000.0    NaN                                                                                       NaN   NaN              4.002191             0.254427         2.47             3.85             4.02             4.18             4.82
-ratings_count              10000.0    NaN                                                                                       NaN   NaN            54001.2351        157369.956436       2716.0         13568.75          21155.5          41053.5        4780653.0
-work_ratings_count         10000.0    NaN                                                                                       NaN   NaN            59687.3216        167803.785237       5510.0         15438.75          23832.5          45915.0        4942365.0
-work_text_reviews_count    10000.0    NaN                                                                                       NaN   NaN             2919.9553          6124.378132          3.0            694.0           1402.0          2744.25         155254.0
-ratings_1                  10000.0    NaN                                                                                       NaN   NaN             1345.0406          6635.626263         11.0            196.0            391.0            885.0         456191.0
-ratings_2                  10000.0    NaN                                                                                       NaN   NaN              3110.885          9717.123578         30.0            656.0           1163.0          2353.25         436802.0
-ratings_3                  10000.0    NaN                                                                                       NaN   NaN            11475.8938         28546.449183        323.0           3112.0           4894.0           9287.0         793319.0
-ratings_4                  10000.0    NaN                                                                                       NaN   NaN            19965.6966         51447.358384        750.0          5405.75           8269.5          16023.5        1481305.0
-ratings_5                  10000.0    NaN                                                                                       NaN   NaN            23789.8056         79768.885611        754.0           5334.0           8836.0          17304.5        3011543.0
-image_url                    10000   6669  https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png  3332                   NaN                  NaN          NaN              NaN              NaN              NaN              NaN
-small_image_url              10000   6669    https://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png  3332                   NaN                  NaN          NaN              NaN              NaN              NaN              NaN
+|                           |   count |   unique | top                                                                                      |   freq |            mean |              std |            min |             25% |              50% |             75% |              max |
+|:--------------------------|--------:|---------:|:-----------------------------------------------------------------------------------------|-------:|----------------:|-----------------:|---------------:|----------------:|-----------------:|----------------:|-----------------:|
+| book_id                   |   10000 |      nan | nan                                                                                      |    nan |  5000.5         |   2886.9         |     1          |  2500.75        |   5000.5         |  7500.25        |  10000           |
+| goodreads_book_id         |   10000 |      nan | nan                                                                                      |    nan |     5.2647e+06  |      7.57546e+06 |     1          | 46275.8         | 394966           |     9.38223e+06 |      3.32886e+07 |
+| best_book_id              |   10000 |      nan | nan                                                                                      |    nan |     5.47121e+06 |      7.82733e+06 |     1          | 47911.8         | 425124           |     9.63611e+06 |      3.55342e+07 |
+| work_id                   |   10000 |      nan | nan                                                                                      |    nan |     8.64618e+06 |      1.17511e+07 |    87          |     1.00884e+06 |      2.71952e+06 |     1.45177e+07 |      5.63996e+07 |
+| books_count               |   10000 |      nan | nan                                                                                      |    nan |    75.7127      |    170.471       |     1          |    23           |     40           |    67           |   3455           |
+| isbn                      |    9300 |     9300 | 375700455                                                                                |      1 |   nan           |    nan           |   nan          |   nan           |    nan           |   nan           |    nan           |
+| isbn13                    |    9415 |      nan | nan                                                                                      |    nan |     9.75504e+12 |      4.42862e+11 |     1.9517e+08 |     9.78032e+12 |      9.78045e+12 |     9.78083e+12 |      9.79001e+12 |
+| authors                   |   10000 |     4664 | Stephen King                                                                             |     60 |   nan           |    nan           |   nan          |   nan           |    nan           |   nan           |    nan           |
+| original_publication_year |    9979 |      nan | nan                                                                                      |    nan |  1981.99        |    152.577       | -1750          |  1990           |   2004           |  2011           |   2017           |
+| original_title            |    9415 |     9274 |                                                                                          |      5 |   nan           |    nan           |   nan          |   nan           |    nan           |   nan           |    nan           |
+| title                     |   10000 |     9964 | Selected Poems                                                                           |      4 |   nan           |    nan           |   nan          |   nan           |    nan           |   nan           |    nan           |
+| language_code             |    8916 |       25 | eng                                                                                      |   6341 |   nan           |    nan           |   nan          |   nan           |    nan           |   nan           |    nan           |
+| average_rating            |   10000 |      nan | nan                                                                                      |    nan |     4.00219     |      0.254427    |     2.47       |     3.85        |      4.02        |     4.18        |      4.82        |
+| ratings_count             |   10000 |      nan | nan                                                                                      |    nan | 54001.2         | 157370           |  2716          | 13568.8         |  21155.5         | 41053.5         |      4.78065e+06 |
+| work_ratings_count        |   10000 |      nan | nan                                                                                      |    nan | 59687.3         | 167804           |  5510          | 15438.8         |  23832.5         | 45915           |      4.94236e+06 |
+| work_text_reviews_count   |   10000 |      nan | nan                                                                                      |    nan |  2919.96        |   6124.38        |     3          |   694           |   1402           |  2744.25        | 155254           |
+| ratings_1                 |   10000 |      nan | nan                                                                                      |    nan |  1345.04        |   6635.63        |    11          |   196           |    391           |   885           | 456191           |
+| ratings_2                 |   10000 |      nan | nan                                                                                      |    nan |  3110.89        |   9717.12        |    30          |   656           |   1163           |  2353.25        | 436802           |
+| ratings_3                 |   10000 |      nan | nan                                                                                      |    nan | 11475.9         |  28546.4         |   323          |  3112           |   4894           |  9287           | 793319           |
+| ratings_4                 |   10000 |      nan | nan                                                                                      |    nan | 19965.7         |  51447.4         |   750          |  5405.75        |   8269.5         | 16023.5         |      1.4813e+06  |
+| ratings_5                 |   10000 |      nan | nan                                                                                      |    nan | 23789.8         |  79768.9         |   754          |  5334           |   8836           | 17304.5         |      3.01154e+06 |
+| image_url                 |   10000 |     6669 | https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png |   3332 |   nan           |    nan           |   nan          |   nan           |    nan           |   nan           |    nan           |
+| small_image_url           |   10000 |     6669 | https://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png   |   3332 |   nan           |    nan           |   nan          |   nan           |    nan           |   nan           |    nan           |
 
 ## Correlation Matrix
-                            book_id  goodreads_book_id  best_book_id   work_id  books_count    isbn13  original_publication_year  average_rating  ratings_count  work_ratings_count  work_text_reviews_count  ratings_1  ratings_2  ratings_3  ratings_4  ratings_5
-book_id                    1.000000           0.115154      0.104516  0.113861    -0.263841 -0.011291                   0.049875       -0.040880      -0.373178           -0.382656                -0.419292  -0.239401  -0.345764  -0.413279  -0.407079  -0.332486
-goodreads_book_id          0.115154           1.000000      0.966620  0.929356    -0.164578 -0.048246                   0.133790       -0.024848      -0.073023           -0.063760                 0.118845  -0.038375  -0.056571  -0.075634  -0.063310  -0.056145
-best_book_id               0.104516           0.966620      1.000000  0.899258    -0.159240 -0.047253                   0.131442       -0.021187      -0.069182           -0.055835                 0.125893  -0.033894  -0.049284  -0.067014  -0.054462  -0.049524
-work_id                    0.113861           0.929356      0.899258  1.000000    -0.109436 -0.039320                   0.107972       -0.017555      -0.062720           -0.054712                 0.096985  -0.034590  -0.051367  -0.066746  -0.054775  -0.046745
-books_count               -0.263841          -0.164578     -0.159240 -0.109436     1.000000  0.017865                  -0.321753       -0.069888       0.324235            0.333664                 0.198698   0.225763   0.334923   0.383699   0.349564   0.279559
-isbn13                    -0.011291          -0.048246     -0.047253 -0.039320     0.017865  1.000000                  -0.004612       -0.025667       0.008904            0.009166                 0.009553   0.006054   0.010345   0.012142   0.010161   0.006622
-original_publication_year  0.049875           0.133790      0.131442  0.107972    -0.321753 -0.004612                   1.000000        0.015608      -0.024415           -0.025448                 0.027784  -0.019635  -0.038472  -0.042459  -0.025785  -0.015388
-average_rating            -0.040880          -0.024848     -0.021187 -0.017555    -0.069888 -0.025667                   0.015608        1.000000       0.044990            0.045042                 0.007481  -0.077997  -0.115875  -0.065237   0.036108   0.115412
-ratings_count             -0.373178          -0.073023     -0.069182 -0.062720     0.324235  0.008904                  -0.024415        0.044990       1.000000            0.995068                 0.779635   0.723144   0.845949   0.935193   0.978869   0.964046
-work_ratings_count        -0.382656          -0.063760     -0.055835 -0.054712     0.333664  0.009166                  -0.025448        0.045042       0.995068            1.000000                 0.807009   0.718718   0.848581   0.941182   0.987764   0.966587
-work_text_reviews_count   -0.419292           0.118845      0.125893  0.096985     0.198698  0.009553                   0.027784        0.007481       0.779635            0.807009                 1.000000   0.572007   0.696880   0.762214   0.817826   0.764940
-ratings_1                 -0.239401          -0.038375     -0.033894 -0.034590     0.225763  0.006054                  -0.019635       -0.077997       0.723144            0.718718                 0.572007   1.000000   0.926140   0.795364   0.672986   0.597231
-ratings_2                 -0.345764          -0.056571     -0.049284 -0.051367     0.334923  0.010345                  -0.038472       -0.115875       0.845949            0.848581                 0.696880   0.926140   1.000000   0.949596   0.838298   0.705747
-ratings_3                 -0.413279          -0.075634     -0.067014 -0.066746     0.383699  0.012142                  -0.042459       -0.065237       0.935193            0.941182                 0.762214   0.795364   0.949596   1.000000   0.952998   0.825550
-ratings_4                 -0.407079          -0.063310     -0.054462 -0.054775     0.349564  0.010161                  -0.025785        0.036108       0.978869            0.987764                 0.817826   0.672986   0.838298   0.952998   1.000000   0.933785
-ratings_5                 -0.332486          -0.056145     -0.049524 -0.046745     0.279559  0.006622                  -0.015388        0.115412       0.964046            0.966587                 0.764940   0.597231   0.705747   0.825550   0.933785   1.000000
+|                           |    book_id |   goodreads_book_id |   best_book_id |    work_id |   books_count |      isbn13 |   original_publication_year |   average_rating |   ratings_count |   work_ratings_count |   work_text_reviews_count |   ratings_1 |   ratings_2 |   ratings_3 |   ratings_4 |   ratings_5 |
+|:--------------------------|-----------:|--------------------:|---------------:|-----------:|--------------:|------------:|----------------------------:|-----------------:|----------------:|---------------------:|--------------------------:|------------:|------------:|------------:|------------:|------------:|
+| book_id                   |  1         |           0.115154  |      0.104516  |  0.113861  |    -0.263841  | -0.011291   |                  0.0498747  |      -0.0408798  |     -0.373178   |          -0.382656   |               -0.419292   | -0.239401   |  -0.345764  |  -0.413279  |  -0.407079  | -0.332486   |
+| goodreads_book_id         |  0.115154  |           1         |      0.96662   |  0.929356  |    -0.164578  | -0.048246   |                  0.13379    |      -0.0248484  |     -0.073023   |          -0.0637601  |                0.118845   | -0.0383752  |  -0.0565712 |  -0.075634  |  -0.0633104 | -0.0561447  |
+| best_book_id              |  0.104516  |           0.96662   |      1         |  0.899258  |    -0.15924   | -0.0472525  |                  0.131442   |      -0.021187   |     -0.0691819  |          -0.0558346  |                0.125893   | -0.0338938  |  -0.0492842 |  -0.0670141 |  -0.054462  | -0.0495245  |
+| work_id                   |  0.113861  |           0.929356  |      0.899258  |  1         |    -0.109436  | -0.0393198  |                  0.107972   |      -0.0175554  |     -0.0627204  |          -0.0547121  |                0.0969853  | -0.0345903  |  -0.0513668 |  -0.0667459 |  -0.0547754 | -0.0467453  |
+| books_count               | -0.263841  |          -0.164578  |     -0.15924   | -0.109436  |     1         |  0.0178649  |                 -0.321753   |      -0.0698883  |      0.324235   |           0.333664   |                0.198698   |  0.225763   |   0.334923  |   0.383699  |   0.349564  |  0.279559   |
+| isbn13                    | -0.011291  |          -0.048246  |     -0.0472525 | -0.0393198 |     0.0178649 |  1          |                 -0.00461214 |      -0.0256669  |      0.00890359 |           0.00916556 |                0.00955286 |  0.00605369 |   0.0103455 |   0.0121425 |   0.0101608 |  0.00662185 |
+| original_publication_year |  0.0498747 |           0.13379   |      0.131442  |  0.107972  |    -0.321753  | -0.00461214 |                  1          |       0.0156076  |     -0.0244147  |          -0.0254478  |                0.0277841  | -0.019635   |  -0.0384716 |  -0.0424592 |  -0.0257847 | -0.0153877  |
+| average_rating            | -0.0408798 |          -0.0248484 |     -0.021187  | -0.0175554 |    -0.0698883 | -0.0256669  |                  0.0156076  |       1          |      0.0449904  |           0.0450416  |                0.00748112 | -0.0779966  |  -0.115875  |  -0.0652372 |   0.0361082 |  0.115412   |
+| ratings_count             | -0.373178  |          -0.073023  |     -0.0691819 | -0.0627204 |     0.324235  |  0.00890359 |                 -0.0244147  |       0.0449904  |      1          |           0.995068   |                0.779635   |  0.723144   |   0.845949  |   0.935193  |   0.978869  |  0.964046   |
+| work_ratings_count        | -0.382656  |          -0.0637601 |     -0.0558346 | -0.0547121 |     0.333664  |  0.00916556 |                 -0.0254478  |       0.0450416  |      0.995068   |           1          |                0.807009   |  0.718718   |   0.848581  |   0.941182  |   0.987764  |  0.966587   |
+| work_text_reviews_count   | -0.419292  |           0.118845  |      0.125893  |  0.0969853 |     0.198698  |  0.00955286 |                  0.0277841  |       0.00748112 |      0.779635   |           0.807009   |                1          |  0.572007   |   0.69688   |   0.762214  |   0.817826  |  0.76494    |
+| ratings_1                 | -0.239401  |          -0.0383752 |     -0.0338938 | -0.0345903 |     0.225763  |  0.00605369 |                 -0.019635   |      -0.0779966  |      0.723144   |           0.718718   |                0.572007   |  1          |   0.92614   |   0.795364  |   0.672986  |  0.597231   |
+| ratings_2                 | -0.345764  |          -0.0565712 |     -0.0492842 | -0.0513668 |     0.334923  |  0.0103455  |                 -0.0384716  |      -0.115875   |      0.845949   |           0.848581   |                0.69688    |  0.92614    |   1         |   0.949596  |   0.838298  |  0.705747   |
+| ratings_3                 | -0.413279  |          -0.075634  |     -0.0670141 | -0.0667459 |     0.383699  |  0.0121425  |                 -0.0424592  |      -0.0652372  |      0.935193   |           0.941182   |                0.762214   |  0.795364   |   0.949596  |   1         |   0.952998  |  0.82555    |
+| ratings_4                 | -0.407079  |          -0.0633104 |     -0.054462  | -0.0547754 |     0.349564  |  0.0101608  |                 -0.0257847  |       0.0361082  |      0.978869   |           0.987764   |                0.817826   |  0.672986   |   0.838298  |   0.952998  |   1         |  0.933785   |
+| ratings_5                 | -0.332486  |          -0.0561447 |     -0.0495245 | -0.0467453 |     0.279559  |  0.00662185 |                 -0.0153877  |       0.115412   |      0.964046   |           0.966587   |                0.76494    |  0.597231   |   0.705747  |   0.82555   |   0.933785  |  1          |
 
 ## Outlier Detection
-{
-  "book_id": 0,
-  "goodreads_book_id": 345,
-  "best_book_id": 357,
-  "work_id": 601,
-  "books_count": 844,
-  "isbn13": 556,
-  "original_publication_year": 1031,
-  "average_rating": 158,
-  "ratings_count": 1163,
-  "work_ratings_count": 1143,
-  "work_text_reviews_count": 1005,
-  "ratings_1": 1140,
-  "ratings_2": 1156,
-  "ratings_3": 1149,
-  "ratings_4": 1131,
-  "ratings_5": 1158
-}
+| Column Name | Outlier Count |
+|-------------|---------------|
+| book_id | 0 |
+| goodreads_book_id | 345 |
+| best_book_id | 357 |
+| work_id | 601 |
+| books_count | 844 |
+| isbn13 | 556 |
+| original_publication_year | 1031 |
+| average_rating | 158 |
+| ratings_count | 1163 |
+| work_ratings_count | 1143 |
+| work_text_reviews_count | 1005 |
+| ratings_1 | 1140 |
+| ratings_2 | 1156 |
+| ratings_3 | 1149 |
+| ratings_4 | 1131 |
+| ratings_5 | 1158 |
 
 ## Insights from LLM
-Based on the dataset summary and statistics provided, several analyses and insights can be drawn. Here are some suggestions:
+Based on the dataset summary and statistics provided, there are several avenues for further analysis and insights. Here are some suggestions:
 
 ### 1. Missing Data Analysis
-- **ISBN Columns**: Analyze the impact of missing values in the `isbn` and `isbn13` columns on the overall dataset. Determine if the missing values affect any correlations or metrics.
-- **Original Publication Year**: Investigate the influence of the missing `original_publication_year` on average ratings and reviews.
+- **Assess Impact**: Investigate the implications of the missing values in the `isbn` (700 missing), `isbn13` (585 missing), `original_publication_year` (21 missing), `original_title` (585 missing), and `language_code` (1084 missing) columns. Determine how missing values might influence analytical results and consider strategies for imputation or excluding those rows in analyses.
+  
+### 2. Publication Year Trends
+- **Publication Trends**: Analyze the distribution of `original_publication_year`. Create a time series analysis to see how the number of books published has changed over the years, and identify any notable peaks or troughs in publication activity.
+  
+### 3. Distribution of Ratings
+- **Ratings Breakdown**: Explore the distribution of the `average_rating` and the count of ratings across the various rating levels (1-5). Visualize this using bar plots or histograms to identify patterns in reader sentiment.
+- **Correlation with Books Count**: Investigate how the number of books (as indicated by `books_count`) by an author correlates with the average rating using scatter plots and regression analyses.
 
-### 2. Exploratory Data Analysis (EDA)
-- **Distribution of Ratings**: Visualize the distribution of the different rating categories (`ratings_1` to `ratings_5`) to understand the rating behaviors of users.
-- **Average Rating vs. Ratings Count**: Plot the average rating against the number of ratings to identify patterns. A scatter plot might reveal if more rated books have significantly higher or lower average ratings.
-- **Publication Year Trend**: Analyze the trend in average ratings over the years. This might show if newer books receive better or worse ratings compared to older ones.
+### 4. Author Analysis
+- **Most Prolific Authors**: Identify the authors with the highest `books_count` and examine their average ratings to determine if there is a relationship between the number of books written and average rating.
+- **Top Authors**: Analyze the `authors` column to find the most frequently mentioned authors and their respective rating distributions.
+  
+### 5. Language Analysis
+- **Language Influence**: Examine the `language_code` column to see if there's a significant correlation between the language of a book and its average rating. Consider comparing reader preferences in different languages.
+  
+### 6. Correlation Analysis
+- **Explore Correlations Further**: Beyond the provided correlation matrix, dig deeper into pairs of features that show strong correlation coefficients (positive or negative). Investigate possible causal relationships.
+  
+### 7. Rating Sentiment Analysis
+- **Review Sentiment**: If textual reviews tied to `work_text_reviews_count` can be accessed, perform sentiment analysis to understand how the sentiment of reviews correlates with the rating scores.
 
-### 3. Author Analysis
-- **Top Authors**: Identify the top-rated authors based on average rating and the count of ratings. This can help to understand which authors are consistently well-received by readers.
-- **Collaborative Works**: Examine books with multiple authors (as seen in sample values for `authors`) to see how collaboration influences ratings.
+### 8. Visualization of Data
+- **Visualizations**: Utilize data visualization techniques (e.g., seaborn, matplotlib) to create visual representations of key insights:
+  - Heatmap of correlations
+  - Boxplots of average_rating by year of publication 
+  - Histograms of ratings and count of books
+  - Bar plots of the top-rated books/authors
 
-### 4. Linguistic Analysis
-- **Language Code Insights**: Investigate how books in different languages are rated on average. This could provide insights into cultural preferences and possibly translation challenges.
-- **Most Common Languages**: Identify the most common languages in the dataset and analyze their respective distributions of average ratings.
+### 9. Predictive Modeling
+- **Develop Models**: Use features such as `ratings_count`, `work_ratings_count`, and `books_count` to build regression models predicting `average_rating`. This could help in understanding which factors most influence a book’s success.
 
-### 5. Correlation Analysis
-- **Correlation Discovery**: Dive deeper into the correlation matrix, especially focusing on negative correlations and their potential implications (e.g., how the `ratings_count` correlates with ratings in the 1-5 scale).
-- **Impact of Book Count**: Analyze how `books_count` affects the ratings and reviews as indicated by its correlation (especially negative correlation with average rating).
+### 10. Genre Analysis
+- **Genre Exploration**: If genre data is available or can be matched, analyze how different genres perform in terms of ratings. 
 
-### 6. Comparative Analysis
-- **Best vs. Average Performing Books**: Segment books into top performers (high average ratings and high ratings count) vs. average performers. Compare their attributes like `books_count`, `original_publication_year`, etc.
-- **Visual Comparisons**: Use box plots or violin plots to visually compare key attributes between top-rated and average-rated books.
+### 11. Outlier Detection
+- **Identify Outliers**: Examine books that have unusually high or low ratings relative to their `ratings_count`. This could provide insights into niche genres or books that perform exceptionally well or poorly.
 
-### 7. Time Series Analysis
-- **Publication Year Trends**: Consider how the average rating has changed over time or publication years. This could reveal trends in reader preferences and publishing quality.
-- **Book Rarity**: Analyze whether books with lower counts (from `books_count`) have any impact on ratings. Are rarer titles more highly rated in a niche community?
-
-### 8. Predictive Modeling
-- **Predicting Ratings**: Use features such as `books_count`, `average_rating`, `work_text_reviews_count`, etc., to build a predictive model to estimate a book's rating based on its characteristics.
-- **Clustering Analysis**: Apply clustering methods (like K-Means) to segment books based on similar attributes to see if trends emerge in certain clusters.
-
-### 9. Recommendation System
-- **Collaborative Filtering**: Utilize ratings data to develop a recommendation system identifying books that users might enjoy based on similarities in ratings patterns.
-- **Content-Based Recommendations**: Explore methods for recommending books based on attributes like author, title themes, and publication year.
-
-### 10. Visualization
-- **Create Interactive Dashboards**: Employ visual analysis tools (like Tableau or Power BI) to create interactive dashboards that provide real-time insights and facilitate further investigations by users.
-
-By pursuing some of these analyses, one can derive rich insights into the data, understand reader preferences better, and leverage that to make informed decisions regarding book publishing, marketing, and reader engagement strategies.
+### Conclusion
+Each of these analyses could reveal unique insights about the dataset, driving a deeper understanding of trends and patterns in book ratings, publication, and author success. You may prioritize these suggestions based on specific goals of the project or organizational interests.
 
 ## Visualizations
 ![Correlation Matrix](correlation_matrix.png)
