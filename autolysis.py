@@ -15,6 +15,7 @@ from collections import namedtuple, Counter
 from platformdirs import user_data_dir
 from rich.console import Console
 from subprocess import run, PIPE
+import logging
 
 # Set environment variable for AIPROXY_TOKEN
 AIPROXY_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjMwMDMxMTdAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.LX_wTuS0-CWg6IBPJtnClBNYmwR5yUbDhaWYd2DmaI8"
@@ -22,9 +23,16 @@ AIPROXY_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjMwMDMxMTdAZHMuc3R1ZHkuaW
 # Use the AIProxy endpoint
 AI_PROXY_URL = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 def detect_encoding(file_path):
-    with open(file_path, 'rb') as f:
-        return f.read(512).decode(errors="ignore")
+    try:
+        with open(file_path, 'rb') as f:
+            return f.read(512).decode(errors="ignore")
+    except Exception as e:
+        logging.error(f"Error detecting encoding for {file_path}: {str(e)}")
+        raise
 
 def analyze_csv(file_path):
     try:
@@ -33,51 +41,69 @@ def analyze_csv(file_path):
         
         # Load the CSV file with detected encoding
         data = pd.read_csv(file_path, encoding=encoding)
+        logging.info(f"Successfully loaded {file_path} with encoding {encoding}")
 
         # Basic information about the dataset
-        column_summary = {}
-        for col in data.columns:
-            try:
-                column_summary[col] = {
-                    "type": str(data[col].dtype),
-                    "num_missing": int(data[col].isnull().sum()),
-                    "unique_values": int(data[col].nunique()) if isinstance(data[col].nunique(), (int,)) else data[col].nunique(),
-                    "sample_values": data[col].dropna().sample(min(3, data[col].dropna().shape[0])).tolist() if data[col].nunique() > 3 else data[col].dropna().unique().tolist()
-                }
-            except Exception as e:
-                column_summary[col] = {"error": f"Could not analyze column due to: {str(e)}"}
-
-        # Generate summary statistics
+        column_summary = summarize_columns(data)
         stats = data.describe(include="all").transpose()
 
         # Select only numeric columns for correlation matrix
         numeric_data = data.select_dtypes(include=["number"])
-        if not numeric_data.empty:
-            correlation = numeric_data.corr().to_dict()
-        else:
-            correlation = "No numeric columns available for correlation analysis."
+        correlation = numeric_data.corr().to_dict() if not numeric_data.empty else "No numeric columns available for correlation analysis."
 
         # Detect outliers (IQR Method)
-        outliers = {}
-        for col in numeric_data.columns:
-            try:
-                Q1 = data[col].quantile(0.25)
-                Q3 = data[col].quantile(0.75)
-                IQR = Q3 - Q1
-                outliers[col] = data[(data[col] < (Q1 - 1.5 * IQR)) | (data[col] > (Q3 + 1.5 * IQR))].shape[0]
-            except Exception as e:
-                outliers[col] = f"Error detecting outliers: {str(e)}"
+        outliers = detect_outliers(numeric_data, data)
 
         # Create a summary to send to the LLM
-        llm_prompt = f"""
-        You are analyzing a dataset. Here are the details:
-        Column Summary: {json.dumps(column_summary, indent=2)}
-        Summary Statistics: {stats.to_json()}
-        Correlation Matrix: {json.dumps(correlation)}
-        Suggest further analyses or insights based on this information.
-        """
+        llm_prompt = generate_llm_prompt(column_summary, stats, correlation)
 
         # Send the prompt to AIProxy
+        insights = get_llm_insights(llm_prompt)
+
+        # Write results to README.md
+        write_to_readme(data, column_summary, stats, correlation, outliers, insights)
+
+    except Exception as e:
+        logging.error(f"Error processing file {file_path}: {str(e)}")
+        sys.exit(1)
+
+def summarize_columns(data):
+    column_summary = {}
+    for col in data.columns:
+        try:
+            column_summary[col] = {
+                "type": str(data[col].dtype),
+                "num_missing": int(data[col].isnull().sum()),
+                "unique_values": int(data[col].nunique()) if isinstance(data[col].nunique(), (int,)) else data[col].nunique(),
+                "sample_values": data[col].dropna().sample(min(3, data[col].dropna().shape[0])).tolist() if data[col].nunique() > 3 else data[col].dropna().unique().tolist()
+            }
+        except Exception as e:
+            column_summary[col] = {"error": f"Could not analyze column due to: {str(e)}"}
+    return column_summary
+
+def detect_outliers(numeric_data, data):
+    outliers = {}
+    for col in numeric_data.columns:
+        try:
+            Q1 = data[col].quantile(0.25)
+            Q3 = data[col].quantile(0.75)
+            IQR = Q3 - Q1
+            outliers[col] = data[(data[col] < (Q1 - 1.5 * IQR)) | (data[col] > (Q3 + 1.5 * IQR))].shape[0]
+        except Exception as e:
+            outliers[col] = f"Error detecting outliers: {str(e)}"
+    return outliers
+
+def generate_llm_prompt(column_summary, stats, correlation):
+    return f"""
+    You are analyzing a dataset. Here are the details:
+    Column Summary: {json.dumps(column_summary, indent=2)}
+    Summary Statistics: {stats.to_json()}
+    Correlation Matrix: {json.dumps(correlation)}
+    Suggest further analyses or insights based on this information.
+    """
+
+def get_llm_insights(llm_prompt):
+    try:
         response = httpx.post(
             AI_PROXY_URL,
             headers={
@@ -92,11 +118,18 @@ def analyze_csv(file_path):
                 ]
             }
         )
-
-        # Extract insights from the response
+        response.raise_for_status()
         insights = response.json().get("choices", [{}])[0].get("message", {}).get("content", "No insights available.")
+        return insights
+    except httpx.HTTPStatusError as e:
+        logging.error(f"HTTP error occurred: {str(e)}")
+        return "Error retrieving insights"
+    except Exception as e:
+        logging.error(f"Error occurred while fetching insights: {str(e)}")
+        return "Error retrieving insights"
 
-        # Write results to README.md
+def write_to_readme(data, column_summary, stats, correlation, outliers, insights):
+    try:
         with open("README.md", "w") as f:
             f.write("# Automated Analysis Report\n\n")
             f.write("## Dataset Overview\n")
@@ -128,9 +161,11 @@ def analyze_csv(file_path):
             f.write("## Insights from LLM\n")
             f.write(insights)
             f.write("\n\n")
+        logging.info("README.md successfully written.")
 
     except Exception as e:
-        print(f"Error processing file {file_path}: {str(e)}")
+        logging.error(f"Error writing to README.md: {str(e)}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
