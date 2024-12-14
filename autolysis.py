@@ -17,6 +17,20 @@ import os
 import requests
 import numpy as np
 from chardet import detect
+import subprocess
+
+# List of required packages
+required_packages = [
+    "pandas", "matplotlib", "seaborn", "numpy", "chardet", "requests"
+]
+
+# Install missing packages
+for package in required_packages:
+    try:
+        __import__(package)
+    except ImportError:
+        print(f"Installing {package}...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 # Set environment variable for AIPROXY_TOKEN
 AIPROXY_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjMwMDMxMTdAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.LX_wTuS0-CWg6IBPJtnClBNYmwR5yUbDhaWYd2DmaI8"
