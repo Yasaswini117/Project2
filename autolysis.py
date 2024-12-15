@@ -6,7 +6,8 @@
 #     "seaborn",
 #     "numpy",
 #     "chardet",
-#     "tabulate"
+#     "tabulate",
+#     "requests",
 # ]
 # ///
 
