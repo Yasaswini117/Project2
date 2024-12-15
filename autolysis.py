@@ -57,7 +57,7 @@ def generate_column_summary(data):
                 "type": str(data[col].dtype),
                 "num_missing": int(data[col].isnull().sum()),
                 "unique_values": int(data[col].nunique()),
-                "sample_values": data[col].dropna().sample(min(3, data[col].dropna().shape[0]), random_state=42).tolist()
+                "sample_values": data[col].dropna().sample(min(3, data[col].dropna().shape[0])).tolist()
             }
         except Exception as e:
             column_summary[col] = {"error": f"Could not analyze column: {str(e)}"}
@@ -73,13 +73,9 @@ def detect_outliers(data):
             Q1 = data[col].quantile(0.25)
             Q3 = data[col].quantile(0.75)
             IQR = Q3 - Q1
-            outliers[col] = {
-                "lower_bound": Q1 - 1.5 * IQR,
-                "upper_bound": Q3 + 1.5 * IQR,
-                "outlier_count": int(data[(data[col] < (Q1 - 1.5 * IQR)) | (data[col] > (Q3 + 1.5 * IQR))].shape[0])
-            }
+            outliers[col] = int(data[(data[col] < (Q1 - 1.5 * IQR)) | (data[col] > (Q3 + 1.5 * IQR))].shape[0])
         except Exception as e:
-            outliers[col] = {"error": f"Error detecting outliers: {str(e)}"}
+            outliers[col] = f"Error detecting outliers: {str(e)}"
     return outliers
 
 # Function: Generate visualizations
@@ -99,14 +95,6 @@ def generate_visualizations(data):
         numeric_data.hist(figsize=(12, 10), bins=20, edgecolor='black')
         plt.tight_layout()
         plt.savefig("histograms.png")
-        plt.close()
-
-        # Boxplots for outlier visualization
-        plt.figure(figsize=(12, 8))
-        numeric_data.boxplot()
-        plt.title("Boxplots of Numeric Columns")
-        plt.xticks(rotation=45)
-        plt.savefig("boxplots.png")
         plt.close()
 
 # Function: Generate insights using AIProxy
@@ -168,7 +156,7 @@ def write_report(data, column_summary, stats, outliers, insights):
 
         f.write("## Outlier Detection\n")
         f.write(tabulate(
-            [[col, details.get('outlier_count', 'N/A')] for col, details in outliers.items()],
+            [[col, count] for col, count in outliers.items()],
             headers=["Column", "Outlier Count"],
             tablefmt="github"
         ))
@@ -181,7 +169,6 @@ def write_report(data, column_summary, stats, outliers, insights):
         f.write("## Visualizations\n")
         f.write("![Correlation Heatmap](correlation_matrix.png)\n")
         f.write("![Histograms](histograms.png)\n")
-        f.write("![Boxplots](boxplots.png)\n")
 
 # Main Function
 def main(file_path):
@@ -210,5 +197,6 @@ if __name__ == "__main__":
 
     csv_filename = sys.argv[1]
     main(csv_filename)
+
 
 
