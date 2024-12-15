@@ -208,5 +208,6 @@ if __name__ == "__main__":
         print("Usage: python script.py <csv_filename>")
         sys.exit(1)
 
-    csv
+    csv_filename = sys.argv[1]
+    analyze_csv(csv_filename)
 
